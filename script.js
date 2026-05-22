@@ -1,31 +1,98 @@
 const WA='6281234567890';
-const PRODS=[
-  {id:1,cat:'meja',name:'Meja Makan Jati Solid',emoji:'🪵',price:'Rp 4.800.000',featured:true,desc:'Meja makan dari kayu jati pilihan grade A dengan finishing natural oil. Kokoh, tahan lama, dan semakin indah seiring usia. Tersedia dalam ukuran custom sesuai kebutuhan ruanganmu.',specs:[{l:'Bahan',v:'Kayu Jati A+'},{l:'Ukuran',v:'150×80×75 cm'},{l:'Finishing',v:'Natural Oil'},{l:'Kapasitas',v:'6 Kursi'}]},
-  {id:2,cat:'kursi',name:'Kursi Tamu Minimalis',emoji:'🪑',price:'Rp 1.250.000',featured:false,desc:'Kursi tamu dengan desain minimalis modern berbahan kayu sungkai. Sandaran ergonomis untuk kenyamanan duduk yang lama. Cocok untuk ruang tamu, café, hingga co-working space.',specs:[{l:'Bahan',v:'Kayu Sungkai'},{l:'Ukuran',v:'48×52×82 cm'},{l:'Finishing',v:'Cat Duco'},{l:'Berat Max',v:'120 Kg'}]},
-  {id:3,cat:'lemari',name:'Lemari Pakaian 3 Pintu',emoji:'🚪',price:'Rp 6.500.000',featured:false,desc:'Lemari pakaian 3 pintu dengan desain sliding modern. Interior dilengkapi gantungan baju, laci, dan rak sepatu. Material plywood premium lapis HPL anti-gores.',specs:[{l:'Bahan',v:'Plywood HPL'},{l:'Ukuran',v:'180×50×210 cm'},{l:'Pintu',v:'3 Sliding'},{l:'Interior',v:'Laci + Gantung'}]},
-  {id:4,cat:'rak',name:'Rak Buku Kayu Walnut',emoji:'📚',price:'Rp 2.200.000',featured:false,desc:'Rak buku multi-fungsi dari kayu walnut asli dengan finishing wax polish. Bisa digunakan sebagai rak buku, display koleksi, atau divider ruangan. Tampilan mewah dan elegan.',specs:[{l:'Bahan',v:'Kayu Walnut'},{l:'Ukuran',v:'90×30×180 cm'},{l:'Finishing',v:'Wax Polish'},{l:'Lapisan',v:'5 Rak'}]},
-  {id:5,cat:'sofa',name:'Sofa Rangka Kayu Scandinavian',emoji:'🛋️',price:'Rp 5.900.000',featured:false,desc:'Sofa 3 dudukan dengan rangka kayu jati bergaya Scandinavian. Busa high-density 35D untuk kenyamanan maksimal. Cover fabric premium anti-noda, mudah dilepas cuci.',specs:[{l:'Rangka',v:'Kayu Jati'},{l:'Ukuran',v:'190×80×82 cm'},{l:'Dudukan',v:'3 Orang'},{l:'Busa',v:'HD 35D'}]},
-  {id:6,cat:'meja',name:'Meja Kerja Industrial',emoji:'🖥️',price:'Rp 2.750.000',featured:false,desc:'Meja kerja dengan kombinasi kayu solid dan rangka besi hitam bergaya industrial. Permukaan luas dengan 2 laci penyimpanan. Ideal untuk home office atau studio.',specs:[{l:'Top',v:'Kayu Pinus'},{l:'Rangka',v:'Besi Powder Coat'},{l:'Ukuran',v:'120×60×75 cm'},{l:'Laci',v:'2 Laci Kunci'}]},
-  {id:7,cat:'kursi',name:'Kursi Goyang Klasik',emoji:'🪑',price:'Rp 1.800.000',featured:false,desc:'Kursi goyang klasik dari kayu mahoni pilihan. Desain timeless yang akan selalu relevan. Cocok untuk sudut baca, teras, atau area relaksasi. Tersedia dengan atau tanpa bantal.',specs:[{l:'Bahan',v:'Kayu Mahoni'},{l:'Ukuran',v:'60×80×105 cm'},{l:'Finishing',v:'Politur'},{l:'Berat',v:'12 Kg'}]},
-  {id:8,cat:'rak',name:'Rak Dinding Floating',emoji:'🏺',price:'Rp 450.000',featured:false,desc:'Rak dinding floating dari kayu pinus natural. Tampilan bersih dan minimalis tanpa bracket terlihat. Mudah dipasang, kuat menahan hingga 15 Kg. Tersedia dalam 3 ukuran panjang.',specs:[{l:'Bahan',v:'Kayu Pinus'},{l:'Ukuran',v:'60/80/100×20 cm'},{l:'Beban Max',v:'15 Kg'},{l:'Finishing',v:'Clear Coat'}]}
+const PRODS = [
+  {
+    id: 1,
+    cat: 'lemari',
+    name: 'Lemari Kayu Minimalis',
+    img: '/img/Lemari_1.jpg',
+    price: 'Rp -',
+    desc: 'Lemari penyimpanan minimalis dari kayu pilihan dengan serat alami yang estetis. Desain multifungsi dilengkapi dengan rak terbuka di bagian atas dan pintu geser (sliding door) di bagian bawah. Kokoh, hemat tempat, dan sangat cocok untuk mempercantik ruangan bernuansa skandinavia atau industrial.',
+    specs: [
+      { l: 'Bahan',     v: 'Kayu Jati A+' },
+      { l: 'Ukuran',    v: ' 80 x 60 x 35 cm (bisa custom)' },
+      { l: 'Finishing', v: 'Natural Clear Gloss / Satin (Menonjolkan serat asli kayu)'   },
+      { l: 'Kapasitas', v: '1 Rak Terbuka, Pintu Geser (Sliding Door), Sekat Dalam'       },
+    ],
+  },
+  {
+    id: 2,
+    cat: 'rak',
+    name: 'Rak Serbaguna Kayu Minimalis',
+    img: '/img/Rak_1.jpg',
+    price: 'Rp -',
+    desc: 'Rak TV sekaligus rak display dengan desain asimetris bertingkat yang modern dan artistik. Terbuat dari kayu - pilihan dengan guratan serat yang terekspos indah. Memiliki banyak sekat terbuka yang multifungsi untuk menaruh perangkat elektronik, buku, maupun dekorasi ruangan.',
+    specs: [
+      { l: 'Bahan',     v: 'Kayu Sungkai' },
+      { l: 'Ukuran',    v: '120 x 35 x 60 cm (bisa custom)'  },
+      { l: 'Finishing', v: 'Natural Walnut / Dark Brown (Matte/Satin)'     },
+      { l: 'Desain', v: 'Asimetris Bertingkat'       },
+    ],
+  },
+  {
+    id: 3,
+    cat: ['meja', 'kursi'],
+    name: 'Set kursi santai',
+    img: '/img/Set_Kursi_1.jpg',
+    price: 'Rp -',
+    desc: 'Set meja dan kursi outdoor/taman model minimalis rustic. Terbuat dari kayu palet pilihan yang tebal dan kokoh. Lapisan finishing rustic white memberikan kesan natural, unik, dan tahan terhadap cuaca luar ruangan. Cocok untuk pelengkap interior café, resto, taman, maupun area balkon.',
+    specs: [
+      { l: 'Bahan',    v: '-'  },
+      { l: 'Ukuran',   v: '-'},
+      { l: 'Finishing',    v: '-'    },
+      { l: 'Design', v: '-'},
+    ],
+  },
+  {
+    id: 4,
+    cat: ['meja', 'rak'],
+    name: 'Meja kerja dengan rak samping',
+    img: '/img/Meja_Rak_1.jpg',
+    price: 'Rp -',
+    desc: 'Solusi cerdas untuk ruang kerja atau kamar tidur minimalis. Meja kerja ini hadir dengan konsep industrial modern yang menyatu langsung dengan rak penyimpanan 4 tingkat di bagian samping. Sangat praktis untuk menaruh laptop, buku, tanaman hias, hingga perangkat elektronik kecil tanpa memakan banyak ruang.',
+    specs: [
+      { l: 'Bahan',     v: 'Kayu Jati Belanda' },
+      { l: 'Rangka',   v: 'Besi finishing hitam doff'    },
+      { l: 'Ukuran',    v: '(bisa custom)'  },
+      { l: 'Desain',   v: 'Industrial minimalis'       },
+    ],
+  },
+  {
+    id: 5,
+    cat: 'rak',
+    name: 'Lemari Laci Minimalis 8 Susun',
+    img: '/img/Lemari_Laci.jpg',
+    price: 'Rp -',
+    desc: 'Maksimalkan penyimpanan pakaian dan barang Anda dengan Lemari Laci Minimalis 4 Tingkat ini. Dilengkapi dengan total 8 laci besar yang simetris dan menggunakan tarikan (knob) minimalis. Desainnya yang modern dengan warna putih bertekstur serat kayu memberikan kesan bersih, rapi, dan luas pada kamar tidur atau ruang keluarga Anda.',
+    specs: [
+      { l: 'Bahan',   v: '-'    },
+      { l: 'Ukuran',   v: '-' },
+      { l: 'Kapasitas',  v: '8 Laci Besar, Rel Laci Halus, Knob Stainless Minimalis'      },
+      { l: 'Desain',     v: 'Industrial minimalis'       },
+    ],
+  },
+ 
 ];
 
 function renderProds(f='all'){
   const g=document.getElementById('pgrid');
   g.innerHTML='';
-  const list=f==='all'?PRODS:PRODS.filter(p=>p.cat===f);
+  const list=f==='all'?PRODS:PRODS.filter(p=>[].concat(p.cat).includes(f));
 
   list.forEach((p,i)=>{
     const c=document.createElement('div');
+    const isImg = p.img && (p.img.startsWith('./') || p.img.startsWith('/') || p.img.startsWith('http'));
+    const mediaTpl = isImg
+      ? `<img src="${p.img}" alt="${p.name}" loading="lazy">`
+      : `<div class="pc-img-emoji">${p.img}</div>`;
     c.className='pc sr';
     c.innerHTML=`
       <div class="pc-img">
-        <div class="pc-img-emoji">${p.emoji}</div>
+        ${mediaTpl}
         <div class="pc-veil"></div>
         <div class="pc-see">Lihat Detail</div>
       </div>
       <div class="pc-body">
-        <div class="pc-cat">${p.cat}</div>
+        <div class="pc-cat">${[].concat(p.cat).join(' · ')}</div>
         <div class="pc-name">${p.name}</div>
         <div class="pc-price">${p.price}</div>
       </div>`;
@@ -41,11 +108,14 @@ function renderProds(f='all'){
 }
 
 function openModal(p){
-  document.getElementById('mCat').textContent=p.cat.toUpperCase();
+  document.getElementById('mCat').textContent=[].concat(p.cat).join(' · ').toUpperCase();
   document.getElementById('mName').textContent=p.name;
   document.getElementById('mPrice').textContent=p.price;
   document.getElementById('mDesc').textContent=p.desc;
-  document.getElementById('mImg').textContent=p.emoji;
+  const mImgEl=document.getElementById('mImg');
+  const isImgM=p.img&&(p.img.startsWith('./')||p.img.startsWith('/')||p.img.startsWith('http'));
+  if(isImgM){mImgEl.innerHTML=`<img src="${p.img}" alt="${p.name}">`;mImgEl.style.fontSize=''}
+  else{mImgEl.innerHTML='';mImgEl.textContent=p.img;mImgEl.style.fontSize='7rem'}
   document.getElementById('mSpecs').innerHTML=p.specs.map(s=>`<div class="ms"><div class="ms-l">${s.l}</div><div class="ms-v">${s.v}</div></div>`).join('');
   const msg=encodeURIComponent(`Halo Ruang Kayu! Saya tertarik dengan *${p.name}* (${p.price}). Boleh minta info lebih lanjut?`);
   document.getElementById('mWa').href=`https://wa.me/${WA}?text=${msg}`;
