@@ -41,11 +41,130 @@ img{display:block;max-width:100%}
 .nham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
 .nham span{width:22px;height:1.5px;background:var(--text);display:block;transition:transform .3s,opacity .3s}
 @media(max-width:768px){.nlinks{display:none}.nham{display:flex}}
-#mob{display:none;position:fixed;inset:0;background:var(--bg2);z-index:510;flex-direction:column;justify-content:center;align-items:center;gap:2.5rem}
-#mob.on{display:flex}
-#mob a{font-family:var(--fd);font-size:2.8rem;font-weight:300;font-style:italic;color:var(--text);text-decoration:none;transition:color .3s}
-#mob a:hover{color:var(--c1)}
-.mobx{position:absolute;top:2rem;right:2rem;background:none;border:none;color:var(--text2);font-size:1.5rem;cursor:pointer;font-family:var(--fb);letter-spacing:.1em}
+/* ── MOBILE NAV OVERLAY ─────────────────────────── */
+#mob{
+  position:fixed;inset:0;z-index:510;
+  pointer-events:none;
+}
+#mob.on{pointer-events:all}
+
+#mob-bg{
+  position:absolute;inset:0;
+  background:#3D1F06;
+  clip-path:circle(0% at calc(100% - 44px) 44px);
+  transition:clip-path .65s cubic-bezier(0.16,1,0.3,1);
+}
+#mob.on #mob-bg{
+  clip-path:circle(160% at calc(100% - 44px) 44px);
+}
+
+#mob-content{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  padding:6rem 2rem 3rem;
+  opacity:0;
+  transition:opacity .2s ease;
+}
+#mob.on #mob-content{
+  opacity:1;
+  transition:opacity .3s ease .3s;
+}
+
+.mob-tag{
+  font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;
+  color:rgba(212,160,90,0.7);font-weight:300;
+  margin-bottom:2rem;
+  display:flex;align-items:center;gap:.6rem;
+}
+.mob-tag::before{
+  content:'';width:20px;height:1px;
+  background:rgba(212,160,90,0.5);
+}
+
+.mob-links{
+  flex:1;display:flex;flex-direction:column;gap:0;
+}
+
+.mob-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem 0;
+  border-bottom:1px solid rgba(212,160,90,0.1);
+  text-decoration:none;color:#FDF9F0;
+  transform:translateY(20px);opacity:0;
+  transition:transform .5s cubic-bezier(0.16,1,0.3,1),opacity .5s ease,color .2s;
+  position:relative;overflow:hidden;
+}
+.mob-item::after{
+  content:'';position:absolute;inset:0;
+  background:rgba(212,160,90,0.05);
+  transform:translateX(-100%);
+  transition:transform .4s cubic-bezier(0.16,1,0.3,1);
+}
+.mob-item:hover::after{transform:translateX(0)}
+.mob-item:hover{color:#D4A05A}
+.mob-item:hover .mob-arrow{
+  background:rgba(212,160,90,0.15);
+  border-color:rgba(212,160,90,0.5);
+  color:#D4A05A;
+  transform:translateX(3px) rotate(-45deg);
+}
+
+#mob.on .mob-item:nth-child(1){transform:none;opacity:1;transition-delay:.32s}
+#mob.on .mob-item:nth-child(2){transform:none;opacity:1;transition-delay:.42s}
+#mob.on .mob-item:nth-child(3){transform:none;opacity:1;transition-delay:.52s}
+
+.mob-item-left{display:flex;flex-direction:column;gap:.15rem}
+.mob-item-num{font-size:.58rem;letter-spacing:.15em;color:rgba(212,160,90,0.6);font-weight:300}
+.mob-item-label{
+  font-family:var(--fd);font-size:2.4rem;
+  font-weight:200;font-style:italic;line-height:1;
+}
+
+.mob-arrow{
+  width:32px;height:32px;
+  border:1px solid rgba(212,160,90,0.25);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(212,160,90,0.7);font-size:1.1rem;
+  transition:all .3s;flex-shrink:0;
+}
+
+.mob-footer{
+  border-top:1px solid rgba(212,160,90,0.1);
+  padding-top:1.5rem;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  transform:translateY(16px);opacity:0;
+  transition:transform .5s cubic-bezier(0.16,1,0.3,1) .65s,opacity .5s ease .65s;
+}
+#mob.on .mob-footer{transform:none;opacity:1}
+
+.mob-footer-loc-label{
+  font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(212,160,90,0.5);font-weight:300;margin-bottom:.25rem;
+}
+.mob-footer-loc-val{font-size:.8rem;color:rgba(253,249,240,0.6);font-weight:200}
+
+.mob-wa{
+  display:flex;align-items:center;gap:.5rem;
+  background:rgba(37,211,102,0.12);
+  border:1px solid rgba(37,211,102,0.25);
+  color:#4ade80;padding:.5rem .9rem;border-radius:20px;
+  font-size:.68rem;letter-spacing:.08em;font-weight:300;
+  text-decoration:none;transition:all .3s;
+}
+.mob-wa:hover{background:rgba(37,211,102,0.2);border-color:rgba(37,211,102,0.45)}
+.mob-wa svg{width:14px;flex-shrink:0}
+
+/* ── HAMBURGER ANIMASI ─────────────────────────── */
+.nham span{
+  transition:width .35s cubic-bezier(0.16,1,0.3,1),
+             transform .35s cubic-bezier(0.16,1,0.3,1),
+             opacity .25s ease,
+             background .3s;
+}
+.nham.open span{background:#FAF7F2}
+.nham.open span:nth-child(1){width:22px;transform:translateY(6.5px) rotate(-45deg)}
+.nham.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nham.open span:nth-child(3){width:22px;transform:translateY(-6.5px) rotate(45deg)}
 
 /* ── HERO ─────────────────────────── */
 #hero{
@@ -285,6 +404,99 @@ img{display:block;max-width:100%}
 }
 .pc:hover .pc-see{opacity:1;transform:translateX(-50%) translateY(0)}
 
+
+/* ── MODAL IMAGE CAROUSEL ──────────────────── */
+#mImg {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg2);
+  width: 100%;
+  aspect-ratio: 16/9;
+  cursor: grab;
+}
+#mImg:active { cursor: grabbing; }
+
+.mc-track {
+  display: flex;
+  height: 100%;
+  transition: transform .45s cubic-bezier(0.16,1,0.3,1);
+  will-change: transform;
+}
+.mc-slide {
+  min-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  flex-shrink: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* nav arrows */
+.mc-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(250,247,242,0.85);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background .25s, transform .25s;
+  backdrop-filter: blur(8px);
+}
+.mc-btn:hover { background: #fff; transform: translateY(-50%) scale(1.08); }
+.mc-btn svg { width: 16px; color: var(--text); }
+.mc-prev { left: .75rem; }
+.mc-next { right: .75rem; }
+
+/* dots */
+.mc-dots {
+  position: absolute;
+  bottom: .75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: .45rem;
+  z-index: 10;
+}
+.mc-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(250,247,242,0.5);
+  cursor: pointer;
+  transition: background .3s, transform .3s;
+  padding: 0;
+}
+.mc-dot.on {
+  background: #fff;
+  transform: scale(1.35);
+}
+
+/* counter badge */
+.mc-counter {
+  position: absolute;
+  top: .65rem;
+  right: .75rem;
+  background: rgba(26,17,8,0.55);
+  backdrop-filter: blur(6px);
+  color: rgba(250,247,242,0.9);
+  font-size: .6rem;
+  letter-spacing: .1em;
+  padding: .25rem .6rem;
+  border-radius: 20px;
+  font-family: var(--fb);
+  font-weight: 300;
+  z-index: 10;
+}
+
 /* info */
 .pc-body{padding:1rem 1.25rem 1.4rem}
 .pc-cat{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--c1);font-weight:400;margin-bottom:.3rem}
@@ -361,8 +573,7 @@ footer{background:var(--text);padding:5rem 4rem 3rem;border-top:1px solid rgba(2
 #moverlay.on #modal{transform:none}
 .m-drag{width:36px;height:2.5px;background:var(--border2);margin:.9rem auto;border-radius:2px}
 @media(min-width:640px){.m-drag{display:none}}
-.m-img{width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-size:7rem;background:linear-gradient(135deg,rgba(139,90,43,0.08),rgba(168,114,42,0.12));position:relative;overflow:hidden}
-.m-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.m-img{width:100%;aspect-ratio:16/9;background:var(--bg2);position:relative;overflow:hidden}
 .m-body{padding:2rem 2rem 2.5rem}
 .m-cat{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--c1);margin-bottom:.5rem;font-weight:400}
 .m-name{font-family:var(--fd);font-size:clamp(1.6rem,4vw,2.2rem);color:var(--text);font-weight:300;font-style:italic;line-height:1.1;margin-bottom:.5rem}
