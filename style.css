@@ -184,7 +184,7 @@ img{display:block;max-width:100%}
 .h-bg-img{
   position:absolute;
   inset:0;
-  background-image:url('img/hero.jpg');
+  background-image:url('img/Hero.jpg');
   background-size:cover;
   background-position:center 40%;
   will-change:transform;
