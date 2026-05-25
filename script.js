@@ -1,11 +1,11 @@
   const WA='628979227973';
-  const PRODS = [
+  const DEFAULT_PRODS = [
     {
       id: 1,
       cat: 'lemari',
       name: 'Lemari Kayu Minimalis',
       imgs: ['/img/Lemari_1.jpg', '/img/Lemari_2.jpg'],
-      price: 'Rp -',
+      price: 'Rp 1.450.000',
       desc: 'Lemari penyimpanan minimalis dari kayu pilihan dengan serat alami yang estetis. Desain multifungsi dilengkapi dengan rak terbuka di bagian atas dan pintu geser (sliding door) di bagian bawah. Kokoh, hemat tempat, dan sangat cocok untuk mempercantik ruangan bernuansa skandinavia atau industrial.',
       specs: [
         { l: 'Bahan', v: 'Kayu Jati A+' },
@@ -19,8 +19,8 @@
       cat: 'rak',
       name: 'Rak Serbaguna Kayu Minimalis',
       imgs: ['/img/Rak_1.jpg', '/img/Rak_2.jpg'],
-      price: 'Rp -',
-      desc: 'Rak TV sekaligus rak display dengan desain asimetris bertingkat yang modern dan artistik. Terbuat dari kayu - pilihan dengan guratan serat yang terekspos indah. Memiliki banyak sekat terbuka yang multifungsi untuk menaruh perangkat elektronik, buku, maupun dekorasi ruangan.',
+      price: 'Rp 850.000',
+      desc: 'Rak TV sekaligus rak display dengan desain asimetris bertingkat yang modern dan artistik. Terbuat dari kayu pilihan dengan guratan serat yang terekspos indah. Memiliki banyak sekat terbuka yang multifungsi untuk menaruh perangkat elektronik, buku, maupun dekorasi ruangan.',
       specs: [
         { l: 'Bahan', v: 'Kayu Sungkai' },
         { l: 'Ukuran', v: '120 x 35 x 60 cm (bisa custom)' },
@@ -33,13 +33,13 @@
       cat: ['meja', 'kursi'],
       name: 'Set Kursi Santai',
       imgs: ['/img/Set_Kursi_1.jpg', '/img/Set_Kursi_2.jpg'],
-      price: 'Rp -',
+      price: 'Rp 1.250.000',
       desc: 'Set meja dan kursi outdoor/taman model minimalis rustic. Terbuat dari kayu palet pilihan yang tebal dan kokoh. Lapisan finishing rustic white memberikan kesan natural, unik, dan tahan terhadap cuaca luar ruangan. Cocok untuk pelengkap interior café, resto, taman, maupun area balkon.',
       specs: [
-        { l: 'Bahan', v: '-' },
-        { l: 'Ukuran', v: '-' },
-        { l: 'Finishing', v: '-' },
-        { l: 'Design', v: '-' },
+        { l: 'Bahan', v: 'Kayu Jati Belanda (Eks Palet Solid)' },
+        { l: 'Ukuran', v: 'Meja 80x50x45cm, Kursi P 120cm' },
+        { l: 'Finishing', v: 'Rustic Whitewash (Outdoor Coating)' },
+        { l: 'Kapasitas', v: '2 Kursi Panjang, 1 Meja Utama' },
       ],
     },
     {
@@ -47,13 +47,13 @@
       cat: ['meja', 'rak'],
       name: 'Meja Kerja dengan Rak Samping',
       imgs: ['/img/Meja_Rak_1.jpg', '/img/Meja_Rak_2.jpg'],
-      price: 'Rp -',
+      price: 'Rp 1.850.000',
       desc: 'Solusi cerdas untuk ruang kerja atau kamar tidur minimalis. Meja kerja ini hadir dengan konsep industrial modern yang menyatu langsung dengan rak penyimpanan 4 tingkat di bagian samping. Sangat praktis untuk menaruh laptop, buku, tanaman hias, hingga perangkat elektronik kecil tanpa memakan banyak ruang.',
       specs: [
-        { l: 'Bahan', v: 'Kayu Jati Belanda' },
-        { l: 'Rangka', v: 'Besi finishing hitam doff' },
-        { l: 'Ukuran', v: '(bisa custom)' },
-        { l: 'Desain', v: 'Industrial minimalis' },
+        { l: 'Bahan', v: 'Kayu Jati Belanda Solid' },
+        { l: 'Rangka', v: 'Besi Hollow Finishing Hitam Doff' },
+        { l: 'Ukuran', v: 'Total 120 x 60 x 140 cm (bisa custom)' },
+        { l: 'Desain', v: 'Industrial Minimalis 4 Tingkat' },
       ],
     },
     {
@@ -61,16 +61,32 @@
       cat: 'rak',
       name: 'Lemari Laci Minimalis 8 Susun',
       imgs: ['/img/Lemari_Laci.jpg'],
-      price: 'Rp -',
-      desc: 'Maksimalkan penyimpanan pakaian dan barang Anda dengan Lemari Laci Minimalis 4 Tingkat ini. Dilengkapi dengan total 8 laci besar yang simetris dan menggunakan tarikan (knob) minimalis. Desainnya yang modern dengan warna putih bertekstur serat kayu memberikan kesan bersih, rapi, dan luas pada kamar tidur atau ruang keluarga Anda.',
+      price: 'Rp 2.100.000',
+      desc: 'Maksimalkan penyimpanan pakaian dan barang Anda dengan lemari laci fungsional ini. Dilengkapi dengan total 8 laci besar yang simetris dan menggunakan tarikan (knob) minimalis. Desainnya yang modern dengan warna putih bertekstur serat kayu memberikan kesan bersih, rapi, dan luas pada kamar tidur atau ruang keluarga Anda.',
       specs: [
-        { l: 'Bahan', v: '-' },
-        { l: 'Ukuran', v: '-' },
-        { l: 'Kapasitas', v: '8 Laci Besar, Rel Laci Halus, Knob Stainless' },
-        { l: 'Desain', v: 'Industrial minimalis' },
+        { l: 'Bahan', v: 'Kayu Mahoni Oven & Multiplek 18mm' },
+        { l: 'Ukuran', v: '140 x 45 x 85 cm' },
+        { l: 'Kapasitas', v: '8 Laci Besar, Rel Laci Halus, Knob Minimalis' },
+        { l: 'Finishing', v: 'Duco Putih Tulang (Broken White)' },
       ],
     },
   ];
+
+  let PRODS = [...DEFAULT_PRODS];
+
+  function getProductCategories(p) {
+    if (Array.isArray(p.cat)) return p.cat;
+    if (typeof p.cat === 'string') return p.cat.split(',').map(c => c.trim()).filter(Boolean);
+    return [];
+  }
+
+  function getProductSpecs(p) {
+    if (!p.specs || !Array.isArray(p.specs)) return [];
+    return p.specs.map(s => {
+      if (Array.isArray(s)) return { l: s[0] || '', v: s[1] || '' };
+      return { l: s.l || '', v: s.v || '' };
+    });
+  };
 
   // ── CAROUSEL STATE ──────────────────────────────
   let curImgs = [], curIdx = 0;
@@ -131,7 +147,7 @@
   function renderProds(f='all'){
     const g=document.getElementById('pgrid');
     g.innerHTML='';
-    const list=f==='all'?PRODS:PRODS.filter(p=>[].concat(p.cat).includes(f));
+    const list=f==='all'?PRODS:PRODS.filter(p=>getProductCategories(p).includes(f));
 
     list.forEach((p,i)=>{
       const thumb = (p.imgs && p.imgs[0]) || '';
@@ -148,7 +164,7 @@
           <div class="pc-see">Lihat Detail</div>
         </div>
         <div class="pc-body">
-          <div class="pc-cat">${[].concat(p.cat).join(' · ')}</div>
+          <div class="pc-cat">${getProductCategories(p).join(' · ')}</div>
           <div class="pc-name">${p.name}</div>
           <div class="pc-price">${p.price}</div>
         </div>`;
@@ -163,12 +179,12 @@
   }
 
   function openModal(p){
-    document.getElementById('mCat').textContent=[].concat(p.cat).join(' · ').toUpperCase();
+    document.getElementById('mCat').textContent=getProductCategories(p).join(' · ').toUpperCase();
     document.getElementById('mName').textContent=p.name;
     document.getElementById('mPrice').textContent=p.price;
     document.getElementById('mDesc').textContent=p.desc;
     buildCarousel(p.imgs || []);
-    document.getElementById('mSpecs').innerHTML=p.specs.map(s=>`<div class="ms"><div class="ms-l">${s.l}</div><div class="ms-v">${s.v}</div></div>`).join('');
+    document.getElementById('mSpecs').innerHTML=getProductSpecs(p).map(s=>`<div class="ms"><div class="ms-l">${s.l}</div><div class="ms-v">${s.v}</div></div>`).join('');
     const msg=encodeURIComponent(`Halo Ruang Kayu! Saya tertarik dengan *${p.name}* (${p.price}). Boleh minta info lebih lanjut?`);
     document.getElementById('mWa').href=`https://wa.me/${WA}?text=${msg}`;
     document.getElementById('moverlay').classList.add('on');
@@ -214,4 +230,16 @@
     el.addEventListener('mouseleave',()=>{cur.classList.remove('big');ring.classList.remove('big')});
   });
 
-  renderProds();
+  async function init() {
+    try {
+      const res = await fetch('/api/products');
+      if (res.ok) {
+        PRODS = await res.json();
+      }
+    } catch (e) {
+      console.warn("Could not load products from API, using fallback data:", e);
+    }
+    renderProds();
+  }
+
+  init();
