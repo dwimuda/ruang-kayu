@@ -570,12 +570,18 @@ footer{background:var(--text);padding:5rem 4rem 3rem;border-top:1px solid rgba(2
 .foot-btm{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.75rem;font-size:.7rem;color:rgba(250,247,242,0.25);font-weight:200}
 
 /* ── MODAL ─────────────────────────── */
-#moverlay{position:fixed;inset:0;background:rgba(26,17,8,0.6);backdrop-filter:blur(12px);z-index:800;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .4s var(--ease)}
+#moverlay{position:fixed;inset:0;background:rgba(26,17,8,0.6);backdrop-filter:blur(12px);z-index:800;display:flex;align-items:center;justify-content:center;padding:.7rem;opacity:0;pointer-events:none;transition:opacity .4s var(--ease)}
 #moverlay.on{opacity:1;pointer-events:all}
-#modal{background:var(--bg);width:100%;max-width:580px;max-height:92svh;overflow-y:auto;transform:translateY(20px) scale(.97);transition:transform .5s var(--ease);border:1.5px solid var(--c1);box-shadow:0 20px 60px rgba(26,17,8,0.3);border-radius:16px}
+#modal{background:var(--bg);width:100%;max-width:580px;max-height:95svh;overflow-y:auto;transform:translateY(20px) scale(.97);transition:transform .5s var(--ease);border:1.5px solid var(--c1);box-shadow:0 20px 60px rgba(26,17,8,0.3);border-radius:16px}
 #moverlay.on #modal{transform:none}
 #mImg{border-radius:16px 16px 0 0;overflow:hidden;aspect-ratio:4/3}
 .m-drag{display:none}
+
+/* Scrollbar invisible */
+#modal::-webkit-scrollbar{width:4px}
+#modal::-webkit-scrollbar-track{background:transparent}
+#modal::-webkit-scrollbar-thumb{background:transparent}
+
 @media(min-width:640px){.m-drag{display:none}}
 .m-img{width:100%;aspect-ratio:16/9;background:var(--bg2);position:relative;overflow:hidden}
 .m-body{padding:2rem 2rem 2.5rem}
