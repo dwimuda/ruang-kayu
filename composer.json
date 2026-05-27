@@ -1,0 +1,11 @@
+{
+  "name": "ruang-kayu/app",
+  "description": "Ruang Kayu Furniture Katalog",
+  "require": {
+    "php": ">=8.1",
+    "ext-pdo": "*",
+    "ext-pdo_sqlite": "*",
+    "ext-sqlite3": "*",
+    "ext-fileinfo": "*"
+  }
+}

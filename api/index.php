@@ -327,7 +327,7 @@ function handleUpload($db, $method) {
     err('Invalid file extension.');
   }
   
-  $uploadDir = dirname(__DIR__) . '/img/uploads';
+  $uploadDir = dirname(__DIR__) . '/data/uploads';
   if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0755, true);
   }
