@@ -232,7 +232,7 @@
 
   async function init() {
     try {
-      const res = await fetch('/api/products');
+      const res = await fetch('/api/index.php/products');
       if (res.ok) {
         PRODS = await res.json();
       }
