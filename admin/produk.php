@@ -5,6 +5,7 @@ if (empty($_SESSION['admin_token'])) {
   exit;
 }
 $token = $_SESSION['admin_token'];
+$apiBase = '';
 
 // Fetch products directly from SQLite database to prevent HTTP request deadlock on single-threaded php -S dev server
 $dbPath = dirname(__DIR__) . '/data/ruangkayu.db';
@@ -74,39 +75,24 @@ try {
     <div class="page">
       <div class="card">
         <div class="card-head">
-          <h2><?= count($products) ?> Produk</h2>
+          <h2><span id="prodCount">0</span> Produk</h2>
           <input type="text" id="searchInput" placeholder="Cari produk..." oninput="filterTable()" style="font-family:var(--fb);font-size:.85rem;padding:.5rem 1rem;border:1.5px solid var(--border);border-radius:6px;background:var(--bg);outline:none;width:220px">
         </div>
         <div class="table-wrap">
-          <?php if (count($products)): ?>
-          <table>
+          <table id="productsTable" style="display: none;">
             <thead>
               <tr>
                 <th>#</th><th>Nama</th><th>Kategori</th><th>Harga</th><th>Gambar</th><th>Aksi</th>
               </tr>
             </thead>
             <tbody id="prodTable">
-              <?php foreach ($products as $p): ?>
-              <tr data-name="<?= strtolower(htmlspecialchars($p['name'])) ?>">
-                <td style="color:var(--text2);font-size:.78rem"><?= $p['id'] ?></td>
-                <td class="td-name"><?= htmlspecialchars($p['name']) ?></td>
-                <td><?php foreach (explode(',', $p['cat']) as $c): ?><span class="td-cat"><?= trim($c) ?></span> <?php endforeach; ?></td>
-                <td class="td-price"><?= htmlspecialchars($p['price']) ?></td>
-                <td style="font-size:.78rem;color:var(--text2)"><?php $imgs = is_array($p['imgs']) ? $p['imgs'] : []; echo count($imgs) . ' foto' ?></td>
-                <td class="td-act">
-                  <button class="td-btn" onclick='editProd(<?= json_encode($p) ?>)'>Edit</button>
-                  <button class="td-btn danger" onclick="confirmDel(<?= $p['id'] ?>, '<?= htmlspecialchars(addslashes($p['name'])) ?>')">Hapus</button>
-                </td>
-              </tr>
-              <?php endforeach; ?>
+              <!-- Rendered dynamically by JavaScript -->
             </tbody>
           </table>
-          <?php else: ?>
-          <div class="empty-state">
+          <div class="empty-state" id="emptyState" style="display: none;">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 7H4a1 1 0 00-1 1v10a1 1 0 001 1h16a1 1 0 001-1V8a1 1 0 00-1-1z"/></svg>
             <p>Belum ada produk. Tambahkan yang pertama!</p>
           </div>
-          <?php endif; ?>
         </div>
       </div>
     </div>
@@ -196,6 +182,7 @@ try {
 <script>
 const TOKEN = <?= json_encode($token) ?>;
 const API  = <?= json_encode($apiBase . '/api/index.php') ?>;
+let productsList = <?= json_encode($products) ?>;
 
 function notif(msg, type='ok') {
   const el = document.getElementById('notif');
@@ -206,6 +193,74 @@ function notif(msg, type='ok') {
   ) + msg;
   el.classList.add('show');
   setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.toString()
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function renderTable() {
+  const tbody = document.getElementById('prodTable');
+  const countEl = document.getElementById('prodCount');
+  const tableEl = document.getElementById('productsTable');
+  const emptyEl = document.getElementById('emptyState');
+  
+  tbody.innerHTML = '';
+  countEl.textContent = productsList.length;
+  
+  if (productsList.length === 0) {
+    tableEl.style.display = 'none';
+    emptyEl.style.display = 'block';
+    return;
+  }
+  
+  tableEl.style.display = 'table';
+  emptyEl.style.display = 'none';
+  
+  productsList.forEach(p => {
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-name', p.name.toLowerCase());
+    
+    const categories = (p.cat || '').split(',').map(c => c.trim()).filter(Boolean);
+    const catBadges = categories.map(c => `<span class="td-cat">${escapeHtml(c)}</span>`).join(' ');
+    const imgCount = Array.isArray(p.imgs) ? p.imgs.length : 0;
+    
+    tr.innerHTML = `
+      <td style="color:var(--text2);font-size:.78rem">${p.id}</td>
+      <td class="td-name">${escapeHtml(p.name)}</td>
+      <td>${catBadges}</td>
+      <td class="td-price">${escapeHtml(p.price)}</td>
+      <td style="font-size:.78rem;color:var(--text2)">${imgCount} foto</td>
+      <td class="td-act">
+        <button class="td-btn edit-btn">Edit</button>
+        <button class="td-btn danger del-btn">Hapus</button>
+      </td>
+    `;
+    
+    tr.querySelector('.edit-btn').addEventListener('click', () => editProd(p));
+    tr.querySelector('.del-btn').addEventListener('click', () => confirmDel(p.id, p.name));
+    
+    tbody.appendChild(tr);
+  });
+  
+  filterTable();
+}
+
+async function fetchAndRenderProducts() {
+  try {
+    const data = await api('GET', '/products');
+    if (data && data.error) throw new Error(data.error);
+    productsList = Array.isArray(data) ? data : [];
+    renderTable();
+  } catch (err) {
+    notif('Gagal memuat data terbaru: ' + err.message, 'err');
+  }
 }
 
 function api(method, endpoint, body) {
@@ -309,9 +364,9 @@ async function saveProd(e) {
   try {
     const res = await api(id ? 'PUT' : 'POST', '/products', body);
     if (res.error) throw new Error(res.error);
-    notif(id ? 'Produk diupdate!' : 'Produk ditambahkan!');
+    notif(id ? 'Produk berhasil diperbarui!' : 'Produk berhasil ditambahkan!');
     closeProdModal();
-    setTimeout(() => location.reload(), 800);
+    await fetchAndRenderProducts();
   } catch(err) {
     notif(err.message || 'Gagal menyimpan', 'err');
   }
@@ -331,9 +386,9 @@ document.getElementById('confirmBtnDel').addEventListener('click', async () => {
   try {
     const res = await api('DELETE', '/products?id=' + delId, null);
     if (res.error) throw new Error(res.error);
-    notif('Produk dihapus!');
+    notif('Produk berhasil dihapus!');
     closeConfirm();
-    setTimeout(() => location.reload(), 800);
+    await fetchAndRenderProducts();
   } catch(err) {
     notif(err.message || 'Gagal menghapus', 'err');
   }
@@ -399,6 +454,9 @@ async function handleFileUploads(files) {
 document.getElementById('prodModal').addEventListener('click', e => { if (e.target.id === 'prodModal') closeProdModal(); });
 document.getElementById('confirmDel').addEventListener('click', e => { if (e.target.id === 'confirmDel') closeConfirm(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeProdModal(); closeConfirm(); } });
+
+// Initial client-side render
+renderTable();
 </script>
 
 </body>
