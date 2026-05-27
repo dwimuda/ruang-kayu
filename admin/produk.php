@@ -63,6 +63,9 @@ try {
 
   <div class="main">
     <div class="topbar">
+      <button class="sidebar-toggle" type="button" onclick="toggleSidebar()" aria-label="Buka menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
       <h1>Kelola Produk</h1>
       <div class="topbar-right">
         <button class="btn-p" onclick="openAddModal()" style="font-size:.68rem;padding:.6rem 1.5rem;">
@@ -76,7 +79,7 @@ try {
       <div class="card">
         <div class="card-head">
           <h2><span id="prodCount">0</span> Produk</h2>
-          <input type="text" id="searchInput" placeholder="Cari produk..." oninput="filterTable()" style="font-family:var(--fb);font-size:.85rem;padding:.5rem 1rem;border:1.5px solid var(--border);border-radius:6px;background:var(--bg);outline:none;width:220px">
+          <input type="text" id="searchInput" placeholder="Cari produk..." oninput="filterTable()" style="font-family:var(--fb);font-size:.85rem;padding:.5rem 1rem;border:1.5px solid var(--border);border-radius:6px;background:var(--bg);outline:none;min-width:180px;max-width:100%">
         </div>
         <div class="table-wrap">
           <table id="productsTable" style="display: none;">
@@ -232,12 +235,12 @@ function renderTable() {
     const imgCount = Array.isArray(p.imgs) ? p.imgs.length : 0;
     
     tr.innerHTML = `
-      <td style="color:var(--text2);font-size:.78rem">${p.id}</td>
-      <td class="td-name">${escapeHtml(p.name)}</td>
-      <td>${catBadges}</td>
-      <td class="td-price">${escapeHtml(p.price)}</td>
-      <td style="font-size:.78rem;color:var(--text2)">${imgCount} foto</td>
-      <td class="td-act">
+      <td data-label="#" style="color:var(--text2);font-size:.78rem">${p.id}</td>
+      <td data-label="Nama" class="td-name">${escapeHtml(p.name)}</td>
+      <td data-label="Kategori">${catBadges}</td>
+      <td data-label="Harga" class="td-price">${escapeHtml(p.price)}</td>
+      <td data-label="Gambar" style="font-size:.78rem;color:var(--text2)">${imgCount} foto</td>
+      <td data-label="Aksi" class="td-act">
         <button class="td-btn edit-btn">Edit</button>
         <button class="td-btn danger del-btn">Hapus</button>
       </td>
@@ -450,6 +453,10 @@ async function handleFileUploads(files) {
   }
 }
 
+function toggleSidebar() {
+  document.body.classList.toggle('sidebar-open');
+}
+
 // Close on overlay click
 document.getElementById('prodModal').addEventListener('click', e => { if (e.target.id === 'prodModal') closeProdModal(); });
 document.getElementById('confirmDel').addEventListener('click', e => { if (e.target.id === 'confirmDel') closeConfirm(); });
@@ -458,6 +465,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeProdM
 // Initial client-side render
 renderTable();
 </script>
+<div class="sidebar-backdrop" onclick="toggleSidebar()"></div>
 
 </body>
 </html>

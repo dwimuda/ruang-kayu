@@ -65,6 +65,9 @@ $slice   = array_slice($leads, ($page - 1) * $perPage, $perPage);
 
   <div class="main">
     <div class="topbar">
+      <button class="sidebar-toggle" type="button" onclick="toggleSidebar()" aria-label="Buka menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
       <h1>Leads</h1>
       <div class="topbar-right" style="font-size:.82rem;color:var(--text2)">
         <?= count($leads) ?> total leads
@@ -87,11 +90,11 @@ $slice   = array_slice($leads, ($page - 1) * $perPage, $perPage);
             <tbody>
               <?php foreach ($slice as $l): ?>
               <tr>
-                <td style="color:var(--text2);font-size:.78rem">#<?= $l['id'] ?></td>
-                <td class="td-name"><?= htmlspecialchars($l['product_name'] ?: '-') ?></td>
-                <td style="max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.85rem"><?= htmlspecialchars($l['message'] ?: '-') ?></td>
-                <td><span class="td-status s-<?= $l['source'] ?? 'wa' ?>"><?= strtoupper($l['source'] ?? 'WA') ?></span></td>
-                <td class="td-date"><?= date('d M Y, H:i', strtotime($l['created_at'])) ?></td>
+                <td data-label="ID" style="color:var(--text2);font-size:.78rem">#<?= $l['id'] ?></td>
+                <td data-label="Produk" class="td-name"><?= htmlspecialchars($l['product_name'] ?: '-') ?></td>
+                <td data-label="Pesan" style="max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.85rem"><?= htmlspecialchars($l['message'] ?: '-') ?></td>
+                <td data-label="Sumber"><span class="td-status s-<?= $l['source'] ?? 'wa' ?>"><?= strtoupper($l['source'] ?? 'WA') ?></span></td>
+                <td data-label="Waktu" class="td-date"><?= date('d M Y, H:i', strtotime($l['created_at'])) ?></td>
               </tr>
               <?php endforeach; ?>
             </tbody>
@@ -117,6 +120,11 @@ $slice   = array_slice($leads, ($page - 1) * $perPage, $perPage);
     </div>
   </div>
 </div>
-
+<div class="sidebar-backdrop" onclick="toggleSidebar()"></div>
+<script>
+  function toggleSidebar() {
+    document.body.classList.toggle('sidebar-open');
+  }
+</script>
 </body>
 </html>

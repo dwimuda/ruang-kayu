@@ -72,6 +72,9 @@ try {
   <!-- Main -->
   <div class="main">
     <div class="topbar">
+      <button class="sidebar-toggle" type="button" onclick="toggleSidebar()" aria-label="Buka menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
       <h1>Dashboard</h1>
       <div class="topbar-right">
         <div class="topbar-user"><span><?= substr($username, 0, 1) ?></span><?= htmlspecialchars($username) ?></div>
@@ -119,10 +122,10 @@ try {
             <tbody>
               <?php foreach (array_slice($stats['recent_leads'], 0, 8) as $l): ?>
               <tr>
-                <td class="td-name"><?= htmlspecialchars($l['product_name'] ?: '-') ?></td>
-                <td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><?= htmlspecialchars($l['message'] ?: '-') ?></td>
-                <td><span class="td-status s-<?= $l['source'] ?? 'ok' ?>"><?= strtoupper($l['source'] ?? 'ok') ?></span></td>
-                <td class="td-date"><?= date('d M Y, H:i', strtotime($l['created_at'])) ?></td>
+                <td data-label="Produk" class="td-name"><?= htmlspecialchars($l['product_name'] ?: '-') ?></td>
+                <td data-label="Pesan" style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><?= htmlspecialchars($l['message'] ?: '-') ?></td>
+                <td data-label="Sumber"><span class="td-status s-<?= $l['source'] ?? 'ok' ?>"><?= strtoupper($l['source'] ?? 'ok') ?></span></td>
+                <td data-label="Waktu" class="td-date"><?= date('d M Y, H:i', strtotime($l['created_at'])) ?></td>
               </tr>
               <?php endforeach; ?>
             </tbody>
@@ -138,6 +141,11 @@ try {
     </div>
   </div>
 </div>
-
+<div class="sidebar-backdrop" onclick="toggleSidebar()"></div>
+<script>
+  function toggleSidebar() {
+    document.body.classList.toggle('sidebar-open');
+  }
+</script>
 </body>
 </html>
