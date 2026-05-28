@@ -236,6 +236,10 @@ tr:hover td{background:var(--surface)}
 @media(max-width:1100px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
 
 @media(max-width:900px){
+
+  .modal { scrollbar-width: none; }
+  .modal::-webkit-scrollbar { display: none; }
+
   /* Sembunyikan sidebar desktop, tampilkan bottom nav */
   .sidebar { display: none; }
   .bottom-nav {
@@ -316,13 +320,16 @@ tr:hover td{background:var(--surface)}
   }
   table td[data-label="#"] { display: none; } /* sembunyikan kolom ID */
 
-  /* Modal full-screen di mobile */
-  .modal-overlay { padding: 0; align-items: flex-end; }
+  /* Modal tengah + scrollable di mobile */
+  .modal-overlay { padding: 1rem; align-items: center; }
   .modal {
     max-width: 100%;
-    max-height: 92vh;
-    border-radius: 20px 20px 0 0;
+    max-height: calc(100vh - 80px - 60px); /* 60px = bottom nav */
+    border-radius: 16px;
+    margin-bottom: 0;
+    overflow-y: auto;
   }
+  .modal-foot { position: sticky; bottom: 0; }
   .modal-body { padding: 1.25rem; }
   .form-row { grid-template-columns: 1fr; }
 
