@@ -63,9 +63,6 @@ try {
 
   <div class="main">
     <div class="topbar">
-      <button class="sidebar-toggle" type="button" onclick="toggleSidebar()" aria-label="Buka menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
       <h1>Kelola Produk</h1>
       <div class="topbar-right">
         <button class="btn-p" onclick="openAddModal()" style="font-size:.68rem;padding:.6rem 1.5rem;">
@@ -465,7 +462,24 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeProdM
 // Initial client-side render
 renderTable();
 </script>
-<div class="sidebar-backdrop" onclick="toggleSidebar()"></div>
+... </script> <!-- script terakhir produk.php -->
+
+</div><!-- penutup .admin-layout -->
+
+<nav class="bottom-nav">
+  <a href="dashboard.php" class="bottom-nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+    Dashboard
+  </a>
+  <a href="produk.php" class="bottom-nav-item active">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 7H4a1 1 0 00-1 1v10a1 1 0 001 1h16a1 1 0 001-1V8a1 1 0 00-1-1z"/></svg>
+    Produk
+  </a>
+  <a href="leads.php" class="bottom-nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    Leads
+  </a>
+</nav>
 
 </body>
 </html>

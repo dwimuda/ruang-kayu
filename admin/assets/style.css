@@ -227,17 +227,118 @@ tr:hover td{background:var(--surface)}
   text-decoration: underline;
 }
 
+/* ── Mobile Bottom Nav ────────────────────────── */
+.bottom-nav {
+  display: none;
+}
+
 /* ── Responsive ──────────────────────────────── */
 @media(max-width:1100px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+
 @media(max-width:900px){
-  .sidebar{display:none}
-  .main{margin-left:0}
-  .form-row{grid-template-columns:1fr}
-  .stats-grid{grid-template-columns:repeat(2,1fr)}
-  .page{padding:2rem 1.5rem}
-  .topbar{padding:1.25rem 1.5rem}
+  /* Sembunyikan sidebar desktop, tampilkan bottom nav */
+  .sidebar { display: none; }
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: #1E150D;
+    border-top: 1px solid rgba(212,160,90,.12);
+    height: 60px;
+    z-index: 50;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .bottom-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    color: rgba(250,247,242,.38);
+    font-size: .58rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-family: var(--fb);
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color .25s var(--ease);
+    text-decoration: none;
+    padding: 0;
+  }
+  .bottom-nav-item svg {
+    width: 20px; height: 20px;
+    stroke: currentColor; stroke-width: 1.5; fill: none;
+    flex-shrink: 0;
+  }
+  .bottom-nav-item.active,
+  .bottom-nav-item:hover { color: var(--c3); }
+
+  /* Layout */
+  .main { margin-left: 0; padding-bottom: 60px; }
+  .topbar { padding: 1rem 1.25rem; }
+  .topbar h1 { font-size: 1.25rem; }
+  .page { padding: 1.25rem 1rem; }
+  .sidebar-toggle { display: none; } /* tidak perlu lagi */
+
+  /* Stats 2 kolom */
+  .stats-grid { grid-template-columns: repeat(2,1fr); gap: 10px; margin-bottom: 1.5rem; }
+  .stat-n { font-size: 2rem; }
+
+  /* Tabel jadi card-list di mobile */
+  table thead { display: none; }
+  table, table tbody, table tr, table td { display: block; width: 100%; }
+  table tr {
+    border-bottom: 1px solid var(--border);
+    padding: .85rem 1.25rem;
+  }
+  table tr:last-child { border-bottom: none; }
+  table td {
+    border: none;
+    padding: .18rem 0;
+    font-size: .85rem;
+  }
+  table td::before {
+    content: attr(data-label) ": ";
+    font-size: .65rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text2);
+    font-weight: 500;
+    margin-right: .35rem;
+  }
+  /* Hapus prefix untuk kolom tertentu */
+  table td.td-name::before,
+  table td.td-act::before { content: ''; }
+  table td.td-act {
+    display: flex; gap: .5rem; margin-top: .5rem;
+  }
+  table td[data-label="#"] { display: none; } /* sembunyikan kolom ID */
+
+  /* Modal full-screen di mobile */
+  .modal-overlay { padding: 0; align-items: flex-end; }
+  .modal {
+    max-width: 100%;
+    max-height: 92vh;
+    border-radius: 20px 20px 0 0;
+  }
+  .modal-body { padding: 1.25rem; }
+  .form-row { grid-template-columns: 1fr; }
+
+  /* Confirm box */
+  .confirm-box { padding: 2rem 1.5rem; }
+
+  /* Notif */
+  .notif { bottom: 5rem; left: 1rem; right: 1rem; font-size: .82rem; }
+  
+  /* Card head */
+  .card-head { padding: 1rem 1.25rem; gap: .75rem; }
+  .card-head h2 { font-size: 1.05rem; }
 }
+
 @media(max-width:600px){
-  .stats-grid{grid-template-columns:1fr}
-  .spec-row{grid-template-columns:1fr 1fr 40px}
+  .stats-grid { grid-template-columns: repeat(2,1fr); }
+  .spec-row { grid-template-columns: 1fr 1fr 40px; }
+  .topbar-user span { width: 28px; height: 28px; font-size: .68rem; }
 }
